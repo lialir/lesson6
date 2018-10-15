@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	<meta charset="utf-8">
+	<title>задание 1</title>
+
+    <!--1) Доработать функцию замены картинки в галерее таким образом, чтобы она проверяла наличие картинки по указанному в src адресу.-->
+
+    <style type="text/css">
+        table {
+            border: 1px solid black;
+            width: 300px;
+            height: 100px;
+        }
+        tr {
+            border: 1px solid black;
+        }
+        td {
+            border: 1px solid black;
+            width: 30%;
+            border-color: black;
+        }
+
+        table img { 
+            width: 100px; 
+            height: 100px; 
+            object-fit: cover;
+        }
+
+        div img{
+            width: 500px; 
+            height: 500px; 
+            object-fit: cover; 
+        }
+
+
+  </style>
+
+	<script>
+
+        var imgbig = null;
+        function Draw(id){
+            if(imgbig != null){
+                imgbig.setAttribute('src', id);
+            }
+            else{
+                imgbig=document.createElement('img');
+                imgbig.setAttribute('src',id);
+                var b=document.getElementById('big');
+                b.appendChild(imgbig);
+            }
+            imgbig.onerror = function(){ 
+                alert('нет соответствующего изображения');
+                imgbig.setAttribute('src',"onerror.jpg");
+            }
+        }
+
+	</script>
+
+	</head>
+	<body>
+        <table>
+            <tr>
+                <td><img onclick="Draw(id);" src="tomat.jpg" id="big/tomat.jpg"></td>
+                <td><img onclick="Draw(id);" src="cuc.jpg" id="big/cuc.jpg"></td>
+                <td><img onclick="Draw(id);" src="pep.jpg" id="big/pep.jpg"></td>
+            </tr>
+        </table>
+
+        <div id="big"></div>
+
+    </body>
+</html>

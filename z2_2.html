@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	<meta charset="utf-8">
+	<title>задание 2</title>
+
+<!--2) Реализовать модуль корзины. Создать блок товаров и блок корзины. У каждого товара есть кнопка «Купить», при нажатии на которую происходит добавление имени и цены товара в блок корзины. Корзина должна уметь считать общую сумму заказа.-->
+
+    <style type="text/css">
+        table {
+            border: 1px solid black;
+            width: 300px;
+            height: 100px;
+        }
+        tr {
+            border: 1px solid black;
+        }
+        td {
+            border: 1px solid black;
+            width: 30%;
+            border-color: black;
+        }
+
+        table img { 
+            width: 100px; 
+            height: 100px; 
+            object-fit: cover;
+        }
+
+        div { 
+            height: 100px; 
+            object-fit: cover; 
+        }
+  </style>
+
+	<script>
+		
+		var price, name;
+		var kor=[];
+
+        function getNameVal(id){
+            name=document.getElementById('name_'+id).textContent;
+            price=document.getElementById('price_'+id).textContent;
+            
+            var flagAlreadyExist=0;
+            for (var j=0; j<kor.length; j++) {
+                if (kor[j].art==name) {
+                    kor[j].amount++;
+                    flagAlreadyExist=1;
+                }
+            }
+
+            if (flagAlreadyExist==0){
+                kor.push({art:name,cost:price,amount:1});
+            }
+           
+            console.log(kor);
+
+            var sum=0;
+    		for (var i = 0; i < kor.length; i++) {
+        	sum=sum + parseInt(kor[i].cost)*kor[i].amount;
+    		}
+
+    		document.getElementById('basket').innerHTML = "Сумма = " + sum
+
+            var d = '';
+            for (var p in kor) {
+                d += kor[p] + '<br>';
+            }
+
+            document.getElementById('input').innerHTML = "Cодержимое "+'<br>' + d;
+        }
+
+
+	</script>
+
+
+	</head>
+	<body>
+		<h1>Корзина</h1>
+        <div id="basket">Сумма</div>
+        <div id="input">Cодержимое</div>
+
+
+        <table>
+            <tr>
+                <td><img onclick="Draw(id);" src="tomat.jpg" id="big/tomat.jpg"></td>
+                <td><img onclick="Draw(id);" src="cuc.jpg" id="big/cuc.jpg"></td>
+                <td><img onclick="Draw(id);" src="pep.jpg" id="big/pep.jpg"></td>
+            </tr>
+            <tr>
+                <td id='name_tom'>Помидор</td>
+                <td id='name_cuc'>Огурец</td>
+                <td id='name_pep'>Перец</td>
+            </tr>
+            <tr>
+                <td id='price_tom'>10</td>
+                <td id='price_cuc'>20</td>
+                <td id='price_pep'>30</td>
+            </tr>
+            <tr>
+                <td><button onclick="getNameVal('tom'); "> Добавить в корзину</button></td>
+                <td><button onclick="getNameVal('cuc'); "> Добавить в корзину</button></td>
+                <td><button onclick="getNameVal('pep'); "> Добавить в корзину</button></td>
+            </tr>
+        </table>
+
+        
+
+    </body>
+</html>
